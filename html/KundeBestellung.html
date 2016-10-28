@@ -1,1 +1,47 @@
-<html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Bestellen</title>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>Pizza Auswahl</h1>
+      <form id="PizzaAuswahl" action="">
+        <fieldset>
+          <legend>Pizzen</legend>
+          <ul>
+            <li><button id="btnMargeritha">Margherita</button></li>
+            <li><button id="btnTuna">Tuna</button></li>
+            <li><button id="btnEuropa">Europa</button></li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>Auswahl</legend>
+          <select name="Auswahl[]" multiple>
+            <option>Tuna</option>
+            <option>Tuna</option>
+            <option>Europa</option>
+          </select>
+          <ul>
+            <li><button id="btnAuswahlLoeschen">Auswahl L&ouml;schen</button></li>
+            <li><button id="btnAllesLoeschen">Alles L&ouml;schen</button></li>
+          </ul>
+          <br>
+          <label>Preis
+            <input type="text" name="preis" value="50,3€" size="30" maxlength="40" placeholder="Preis" readonly />
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Bestellen</legend>
+          <label>Adresse
+            <input type="text" name="adresse" size="30" maxlength="40" placeholder="Ihre Adresse" required />
+          </label>
+          <button id="btnBestellen">Bestellen</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
