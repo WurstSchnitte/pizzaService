@@ -2,43 +2,40 @@
 <html>
 <head>
   <meta charset="utf-8"/>
+  <link href="../css/pizza.css" rel="stylesheet">
+  <script src="../js/pizza.js"></script>
   <title>Bestellen</title>
 </head>
-<body>
+<body onload="fill()">
   <main>
     <section>
       <h1>Pizza Auswahl</h1>
-      <form id="PizzaAuswahl" action="">
-        <fieldset>
+      <form id="PizzaAuswahl">
+        <fieldset class="half left">
           <legend>Pizzen</legend>
-          <ul>
-            <li><button id="btnMargeritha">Margherita</button></li>
-            <li><button id="btnTuna">Tuna</button></li>
-            <li><button id="btnEuropa">Europa</button></li>
+          <ul id="menulist">
+            <!-- filledWithJs -->
           </ul>
         </fieldset>
-        <fieldset>
+        <fieldset class="half right">
           <legend>Auswahl</legend>
-          <select name="Auswahl[]" multiple>
-            <option>Tuna</option>
-            <option>Tuna</option>
-            <option>Europa</option>
+          <select id="auswahl" name="Auswahl[]" multiple>
+            <!-- filledWithJs -->
           </select>
           <ul>
-            <li><button id="btnAuswahlLoeschen">Auswahl L&ouml;schen</button></li>
-            <li><button id="btnAllesLoeschen">Alles L&ouml;schen</button></li>
+            <li><button type="button" id="btnAuswahlLoeschen" onclick="rem(false)">Auswahl L&ouml;schen</button></li>
+            <li><button type="button" id="btnAllesLoeschen" onclick="rem(true)">Alles L&ouml;schen</button></li>
           </ul>
-          <br>
-          <label>Preis
-            <input type="text" name="preis" value="50,3€" size="30" maxlength="40" placeholder="Preis" readonly />
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>Bestellen</legend>
-          <label>Adresse
-            <input type="text" name="adresse" size="30" maxlength="40" placeholder="Ihre Adresse" required />
-          </label>
-          <button id="btnBestellen">Bestellen</button>
+          <br/>
+          <label>Preis: <span id="price"></span></label>
+          <br/>
+          <fieldset class="half right">
+            <legend>Bestellen</legend>
+            <label>Adresse
+              <input type="text" name="adresse" size="30" maxlength="40" placeholder="Ihre Adresse" required />
+            </label>
+            <button type="button" onclick="submit2()" id="btnBestellen">Bestellen</button>
+          </fieldset>
         </fieldset>
       </form>
     </section>
