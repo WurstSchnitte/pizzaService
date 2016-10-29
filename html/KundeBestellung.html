@@ -8,7 +8,7 @@
   <main>
     <section>
       <h1>Pizza Auswahl</h1>
-      <form id="PizzaAuswahl" action="">
+      <form id="PizzaAuswahl" action="http://www.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="get">
         <fieldset>
           <legend>Pizzen</legend>
           <ul>
@@ -20,9 +20,9 @@
         <fieldset>
           <legend>Warenkorb</legend>
           <select name="Auswahl[]" multiple>
-            <option>Tuna</option>
-            <option>Tuna</option>
-            <option>Europa</option>
+            <option value="tuna">Tuna</option>
+            <option value="tuna">Tuna</option>
+            <option value="europa">Europa</option>
           </select>
           <button type="button" id="btnAuswahlLoeschen">Auswahl L&ouml;schen</button>
           <button type="button" id="btnAllesLoeschen">Alles L&ouml;schen</button>
