@@ -12,26 +12,21 @@
         <fieldset>
           <legend>Pizzen</legend>
           <ul>
-            <li><button id="btnMargeritha">Margherita</button></li>
-            <li><button id="btnTuna">Tuna</button></li>
-            <li><button id="btnEuropa">Europa</button></li>
+            <li><button button type="button" id="btnMargeritha">Margherita</button><span>4,50€</span></li>
+            <li><button button type="button" id="btnTuna">Tuna</button><span>5,50€</span></li>
+            <li><button button type="button" id="btnEuropa">Europa</button><span>5,50€</span></li>
           </ul>
         </fieldset>
         <fieldset>
-          <legend>Auswahl</legend>
+          <legend>Warenkorb</legend>
           <select name="Auswahl[]" multiple>
             <option>Tuna</option>
             <option>Tuna</option>
             <option>Europa</option>
           </select>
-          <ul>
-            <li><button id="btnAuswahlLoeschen">Auswahl L&ouml;schen</button></li>
-            <li><button id="btnAllesLoeschen">Alles L&ouml;schen</button></li>
-          </ul>
-          <br>
-          <label>Preis
-            <input type="text" name="preis" value="50,3€" size="30" maxlength="40" placeholder="Preis" readonly />
-          </label>
+          <button type="button" id="btnAuswahlLoeschen">Auswahl L&ouml;schen</button>
+          <button type="button" id="btnAllesLoeschen">Alles L&ouml;schen</button>
+          <label>Preis: <span>15,50€</span></label>
         </fieldset>
         <fieldset>
           <legend>Bestellen</legend>
