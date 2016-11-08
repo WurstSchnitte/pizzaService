@@ -11,7 +11,7 @@ var menuitems = [
 
 var auswahl = [];
 var sum = 0;
-var test = 12;
+
 var fill = function(){
   var menulist = document.getElementById("menulist");
   for(var i=0; i<menuitems.length; i++){
