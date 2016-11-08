@@ -2,38 +2,40 @@
 <html>
 <head>
   <meta charset="utf-8"/>
+  <link href="../css/pizza.css" rel="stylesheet">
+  <script src="../js/pizza.js"></script>
   <title>Bestellen</title>
 </head>
-<body>
+<body onload="fill()">
   <main>
     <section>
       <h1>Pizza Auswahl</h1>
-      <form id="PizzaAuswahl" action="http://www.fbi.h-da.de/cgi-bin/Echo.pl" accept-charset="UTF-8" method="get">
-        <fieldset>
+      <form id="PizzaAuswahl">
+        <fieldset class="half left">
           <legend>Pizzen</legend>
-          <ul>
-            <li><button type="button" id="btnMargeritha">Margherita</button><span>4,50€</span></li>
-            <li><button type="button" id="btnTuna">Tuna</button><span>5,50€</span></li>
-            <li><button type="button" id="btnEuropa">Europa</button><span>5,50€</span></li>
+          <ul id="menulist">
+            <!-- filledWithJs -->
           </ul>
         </fieldset>
-        <fieldset>
-          <legend>Warenkorb</legend>
-          <select name="Auswahl[]" multiple>
-            <option value="tuna">Tuna</option>
-            <option value="tuna">Tuna</option>
-            <option value="europa">Europa</option>
+        <fieldset class="half right">
+          <legend>Auswahl</legend>
+          <select id="auswahl" name="Auswahl[]" multiple>
+            <!-- filledWithJs -->
           </select>
-          <button type="button" id="btnAuswahlLoeschen">Auswahl L&ouml;schen</button>
-          <button type="button" id="btnAllesLoeschen">Alles L&ouml;schen</button>
-          <label>Preis: <span>15,50€</span></label>
-        </fieldset>
-        <fieldset>
-          <legend>Bestellen</legend>
-          <label>Adresse
-            <input type="text" name="adresse" size="30" maxlength="40" placeholder="Ihre Adresse" required />
-          </label>
-          <button id="btnBestellen">Bestellen</button>
+          <ul>
+            <li><button type="button" id="btnAuswahlLoeschen" onclick="rem(false)">Auswahl L&ouml;schen</button></li>
+            <li><button type="button" id="btnAllesLoeschen" onclick="rem(true)">Alles L&ouml;schen</button></li>
+          </ul>
+          <br/>
+          <label>Preis: <span id="price"></span></label>
+          <br/>
+          <fieldset class="half right">
+            <legend>Bestellen</legend>
+            <label>Adresse
+              <input type="text" name="adresse" size="30" maxlength="40" placeholder="Ihre Adresse" required />
+            </label>
+            <button type="button" onclick="submit2()" id="btnBestellen">Bestellen</button>
+          </fieldset>
         </fieldset>
       </form>
     </section>
