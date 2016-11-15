@@ -1,3 +1,31 @@
+nav{
+  width: 100%;
+  text-align: center;
+}
+
+nav ul li {
+  float: left;
+  display: block;
+  width: 15em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  list-style: none;
+  border: 1px solid black;
+  background: rgba(0, 0, 200, 0.2);
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  background: rgba(0, 0, 200, 0.5);
+  text-decoration: none;
+  color: yellow;
+}
+
+nav ul li a:link, a:visited {
+  text-decoration: none;
+  color: black;
+}
+
 fieldset {
   background-color: rgba(33, 33, 33, 0.2);
   box-shadow: 3px 3px 14px grey;
@@ -49,4 +77,8 @@ fieldset button:hover{
 
 h1 {
   text-align: center;
+}
+
+footer {
+  clear: both;
 }
