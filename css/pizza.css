@@ -1,28 +1,7 @@
-nav ul {
-  list-style-type: none;
+section form fieldset {
+  width: 60%;
   margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-nav li {
-  float: left;
-  border: 1px solid black;
-  width: 14em;
-  background-color: rgba(0, 0, 200, 0.2);
-}
-
-nav li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-nav li a:hover {
-    background-color: rgba(0, 0, 200, 0.5);
-    color: yellow;
+  text-align: center;
 }
 
 fieldset {
@@ -62,8 +41,9 @@ input#price{
 }
 
 fieldset button{
-  background: rgba(0, 0, 200, 0.2);
+  background: #34495E;
   border: none;
+  color: white;
   margin: 1%;
   padding: 4px;
   border-radius: 3px;
@@ -80,4 +60,35 @@ h1 {
 
 footer {
   clear: both;
+}
+
+@media screen and (orientation:portrait), (max-width:770px) {
+  h1 {
+    font-size: 5em;
+  }
+
+  fieldset.half {
+    width: inherit;
+    float: none;
+  }
+
+  legend {
+    font-size: 2em;
+  }
+
+  select {
+    height: 10em;
+  }
+
+  fieldset button {
+    font-size: 200%;
+  }
+
+  label {
+    font-size: 150%;
+  }
+
+  input {
+    height: 2em;
+  }
 }
