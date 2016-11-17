@@ -11,15 +11,20 @@
     <h1>Pizza Auswahl</h1>
   </header>
   <main>
+      <!--Hier wird das Formular für die Bestellung der Pizzen definiert-->
       <form id="PizzaAuswahl">
+        <!--Der linke Teil für die Auswahl der Pizzen.-->
         <fieldset class="half left">
           <legend>Pizzen</legend>
           <ul id="menulist">
             <!-- filledWithJs -->
           </ul>
         </fieldset>
+        <!--Der rechte Teil, in dem sich die Ausgewählten Pizzen für die Bestellung befinden
+            Zusätzlich befinden sich Knöpfe fürs Löschen einzelner oder aller Pizzen und ein Gesamtpreis-->
         <fieldset class="half right">
           <legend>Auswahl</legend>
+          <
           <select id="auswahl" name="Auswahl[]" multiple>
             <!-- filledWithJs -->
           </select>
@@ -30,6 +35,7 @@
           <br/>
           <label>Preis: <span id="price"></span></label>
           <br/>
+          <!--Hier kann die Adresse eingegeben werden und ein Knopf fürs Abschicken der Bestellung-->
           <fieldset class="half right">
             <legend>Bestellen</legend>
             <label>Adresse
