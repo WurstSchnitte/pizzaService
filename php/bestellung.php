@@ -35,6 +35,5 @@
   }
   $conn->close();
 
-header("Location: ");
-exit();
+header("Location: ../html/info.html");
 ?>
