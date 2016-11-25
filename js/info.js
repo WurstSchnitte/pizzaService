@@ -8,6 +8,6 @@ var init = function(){
       console.log(this.responseText);
     }
   };
-  xhr.open("GET", "../php/info.php", true);
+  xhr.open("GET", "../php/info.php?id="+id, true);
   xhr.send();
 }
