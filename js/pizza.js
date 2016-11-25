@@ -24,6 +24,7 @@ xhr.onreadystatechange = function(){
   if(this.readyState == 4 && this.status == 200){
     console.log(JSON.parse(this.responseText).menuitems);
     menuitems = JSON.parse(this.responseText).menuitems;
+    fill();
   }
 };
 xhr.open("GET", "../php/pizzen.php", true);
