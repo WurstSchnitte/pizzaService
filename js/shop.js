@@ -99,7 +99,7 @@ var submit2 = function(){
 
     xhr.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
-        window.location.href = "info.html?id="+this.responseText;
+        window.location.href = "info.html?"+this.responseText;
       }
     };
     xhr.open("POST", "../php/order.php", true);
