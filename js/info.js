@@ -9,5 +9,5 @@ var init = function(){
     }
   };
   xhr.open("GET", "../php/info.php", true);
-  xhr.send();
+  xhr.send("id="+id);
 }
