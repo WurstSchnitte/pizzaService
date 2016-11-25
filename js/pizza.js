@@ -85,18 +85,10 @@ var submit2 = function(){
   "use strict";
   var s="Ihre Bestellung:\n";
   for(var i=0; i<auswahl.length; i++){
-    s+=auswahl[i][0]+"\n";
+    s+=auswahl[i]+"\n";
   }
   s+="Ihr Preis: "+sum+" €";
-<<<<<<< HEAD
   if(auswahl.length != 0){
-    alert(s);
-=======
-
-  if(auswahl.length != 0){
-    alert(s);
-
->>>>>>> c866525b0a704db6ee953e940d83b12917537e0c
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function(){
@@ -105,11 +97,7 @@ var submit2 = function(){
       }
     };
     xhr.open("POST", "../php/bestellung.php", true);
-<<<<<<< HEAD
-    xhr.send({bestellung: auswahl});
-=======
     xhr.send({"bestellung": auswahl});
 
->>>>>>> c866525b0a704db6ee953e940d83b12917537e0c
   }
 };
