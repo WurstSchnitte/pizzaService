@@ -27,7 +27,7 @@ var fill = function(){
     priceLabel.className = "right menuitem";
 
     nameLabel.textContent = menuitems[i].name;
-    priceLabel.textContent = menuitems[i].price + "€";
+    priceLabel.textContent = menuitems[i].preis + "€";
 
     menuitem.id=i;
     menuitem.type="button";
