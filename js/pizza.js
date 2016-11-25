@@ -88,10 +88,7 @@ var submit2 = function(){
     s+=auswahl[i].name+"\n";
   }
   s+="Ihr Preis: "+sum+" €";
-
   if(auswahl.length != 0){
-    alert(s);
-
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function(){
