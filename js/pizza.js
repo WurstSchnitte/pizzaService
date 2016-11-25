@@ -1,5 +1,9 @@
-var menuitems = [
-    {"name":'Margherita'},
+/*var menuitems = [
+    {
+      "id":1,
+      "price":"8,99",
+      "name":'Margherita'
+    },
     {"name":'Tuna'},
     {"name":'Europa'},
     {"name":'Salami'},
@@ -8,11 +12,23 @@ var menuitems = [
     {"name":'Schinken'},
     {"name":'Diavolo'}
   ];
-
+*/
 //hallo
 
 var auswahl = [];
 var sum = 0;
+
+if(auswahl.length != 0){
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      console.log(this.responseText);
+    }
+  };
+  xhr.open("GET", "../php/pizzen.php", true);
+  xhr.send();
+}
 
 var fill = function(){
   "use strict";
