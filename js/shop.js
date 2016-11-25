@@ -77,7 +77,7 @@ var update = function(){
   sum = 0;
 
   for(i=0; i<auswahl.length; i++){
-    sum += auswahl[i].preis;
+    sum += parseDouble(auswahl[i].preis);
   }
   price.textContent = Math.round(sum*100)/100 + " €";
 };
@@ -103,7 +103,7 @@ var submit2 = function(){
         console.log(this.responseText);
       }
     };
-    xhr.open("POST", "../php/bestellung.php", true);
+    xhr.open("POST", "../php/shop.php", true);
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var par = {
