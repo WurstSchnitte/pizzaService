@@ -29,7 +29,7 @@ var fill = function(){
     nameLabel.textContent = menuitems[i].name;
     priceLabel.textContent = menuitems[i].preis + "€";
 
-    menuitem.id=menuitems[i].id;
+    menuitem.id=i;
     menuitem.type="button";
     menuitem.onclick = function(){
       add(this.id);
@@ -43,7 +43,7 @@ var fill = function(){
 
 var add = function(artNr){
   "use strict";
-  auswahl.push(artNr);
+  auswahl.push(menuitems[artNr]);
   update();
 };
 
@@ -69,7 +69,7 @@ var update = function(){
 
   for(var i=0; i<auswahl.length; i++){
     var el = document.createElement("option");
-    el.textContent = menuitems[auswahl[i]].name;
+    el.textContent = auswahl[i].name;
     auswahlSelect.appendChild(el);
   }
 
@@ -77,7 +77,7 @@ var update = function(){
   sum = 0;
 
   for(i=0; i<auswahl.length; i++){
-    sum += 0;//auswahl[i][1];
+    sum += auswahl[i].preis;
   }
   price.textContent = Math.round(sum*100)/100 + " €";
 };
@@ -85,8 +85,10 @@ var update = function(){
 var submit2 = function(){
   "use strict";
   var s="Ihre Bestellung:\n";
+  var bst = []
   for(var i=0; i<auswahl.length; i++){
-    s+=menuitems[auswahl[i]].name+"\n";
+    s+=auswahl[i].name+"\n";
+    bst.push(auswahl[i].id);
   }
   s+="Ihr Preis: "+sum+" €";
   if(auswahl.length != 0){
@@ -102,7 +104,7 @@ var submit2 = function(){
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var par = {
       "adresse": document.getElementById("adr").value,
-      "bestellung": auswahl
+      "bestellung": bst
     };
     xhr.send(JSON.stringify(par));
   }
