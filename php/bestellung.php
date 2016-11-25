@@ -26,7 +26,7 @@
   $bestellungsid = $result->fetch_assoc();
 
   for($i = 0; $i < sizeof($bestellung); $i++){
-     $sql = "INSERT INTO `pizzabestellung` (`pizza_id`, `bestellung_id`) VALUES ('$bestellung[$i]', '$bestellungsid[id]')";
+     $sql = "INSERT INTO `pizzabestellung` (`pizza_id`, `bestellung_id`, 'zustand') VALUES ('$bestellung[$i]', '$bestellungsid[id]', 0)";
      if ($conn->query($sql) === TRUE) {
          echo "New record created successfully";
      } else {
@@ -34,4 +34,7 @@
      }
   }
   $conn->close();
+
+header("Location: ");
+exit();
 ?>
