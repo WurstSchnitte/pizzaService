@@ -29,7 +29,7 @@ var fill = function(){
     nameLabel.textContent = menuitems[i].name;
     priceLabel.textContent = menuitems[i].preis + "€";
 
-    menuitem.id=i;
+    menuitem.id=menuitems[i].id;
     menuitem.type="button";
     menuitem.onclick = function(){
       add(this.id);
@@ -43,7 +43,7 @@ var fill = function(){
 
 var add = function(artNr){
   "use strict";
-  auswahl.push(menuitems[artNr].id);
+  auswahl.push(artNr);
   update();
 };
 
