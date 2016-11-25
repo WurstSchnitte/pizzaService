@@ -107,7 +107,7 @@ var submit2 = function(){
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var par = {
-      "adresse": ,
+      "adresse": adr,
       "bestellung": bst
     };
     xhr.send(JSON.stringify(par));
