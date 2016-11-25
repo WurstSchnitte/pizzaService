@@ -77,7 +77,7 @@ var update = function(){
   sum = 0;
 
   for(i=0; i<auswahl.length; i++){
-    sum += auswahl[i].preis;
+    sum += parseDouble(auswahl[i].preis);
   }
   price.textContent = Math.round(sum*100)/100 + " €";
 };
