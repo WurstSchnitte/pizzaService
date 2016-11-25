@@ -69,7 +69,7 @@ var update = function(){
 
   for(var i=0; i<auswahl.length; i++){
     var el = document.createElement("option");
-    el.textContent = auswahl[i].name;
+    el.textContent = menuitems[auswahl[i]].name;
     auswahlSelect.appendChild(el);
   }
 
@@ -86,7 +86,7 @@ var submit2 = function(){
   "use strict";
   var s="Ihre Bestellung:\n";
   for(var i=0; i<auswahl.length; i++){
-    s+=auswahl[i].name+"\n";
+    s+=menuitems[auswahl[i]].name+"\n";
   }
   s+="Ihr Preis: "+sum+" €";
   if(auswahl.length != 0){
@@ -100,7 +100,10 @@ var submit2 = function(){
     xhr.open("POST", "../php/bestellung.php", true);
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    var par = {"bestellung": auswahl};
+    var par = {
+      "adresse": document.getElementById("adr").value,
+      "bestellung": auswahl
+    };
     xhr.send(JSON.stringify(par));
   }
 };
