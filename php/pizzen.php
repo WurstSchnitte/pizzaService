@@ -16,12 +16,13 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   // output data of each row
-  $array
   $i = 0;
   while($row = $result->fetch_assoc()) {
-    $array->menuitems[i]->id=$id;
-    $array->menuitems[i]->name=$id;
-    $array->menuitems[i]->preis=$id;
+    $array->menuitems[$i] = new \stdClass;
+    $array->menuitems[$i]->id=$row["id"];
+    $array->menuitems[$i]->name=$row["name"];
+    $array->menuitems[$i]->preis=$row["preis"];
+    $i++;
   }
 } else {
   echo "0 results";
