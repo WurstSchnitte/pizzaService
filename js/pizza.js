@@ -85,7 +85,7 @@ var submit2 = function(){
   "use strict";
   var s="Ihre Bestellung:\n";
   for(var i=0; i<auswahl.length; i++){
-    s+=auswahl[i][0]+"\n";
+    s+=auswahl[i].name+"\n";
   }
   s+="Ihr Preis: "+sum+" €";
 
@@ -100,7 +100,9 @@ var submit2 = function(){
       }
     };
     xhr.open("POST", "../php/bestellung.php", true);
-    xhr.send({"bestellung": auswahl});
 
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    var par = {"bestellung": auswahl};
+    xhr.send(JSON.stringify(par));
   }
 };
