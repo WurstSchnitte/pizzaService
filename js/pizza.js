@@ -22,7 +22,8 @@ var sum = 0;
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function(){
   if(this.readyState == 4 && this.status == 200){
-    document.getElementById("error").innerHtml = this.responseText;
+    console.log(this.responseText);
+    menuitems = JSON.parse(this.responseText);
   }
 };
 xhr.open("GET", "../php/pizzen.php", true);
