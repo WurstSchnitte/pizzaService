@@ -13,6 +13,7 @@
     {"name":'Diavolo'}
   ];
 */
+var menuitems = [];
 //hallo
 
 var auswahl = [];
