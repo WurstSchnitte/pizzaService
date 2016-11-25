@@ -1,34 +1,19 @@
-/*var menuitems = [
-    {
-      "id":1,
-      "price":"8,99",
-      "name":'Margherita'
-    },
-    {"name":'Tuna'},
-    {"name":'Europa'},
-    {"name":'Salami'},
-    {"name":'Funghi'},
-    {"name":'Fuoco'},
-    {"name":'Schinken'},
-    {"name":'Diavolo'}
-  ];
-*/
-var menuitems = [];
-//hallo
-
 var auswahl = [];
+var menuitems = [];
 var sum = 0;
 
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function(){
-  if(this.readyState == 4 && this.status == 200){
-    console.log(JSON.parse(this.responseText).menuitems);
-    menuitems = JSON.parse(this.responseText).menuitems;
-    fill();
-  }
-};
-xhr.open("GET", "../php/pizzen.php", true);
-xhr.send();
+var init=function(){
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      console.log(JSON.parse(this.responseText).menuitems);
+      menuitems = JSON.parse(this.responseText).menuitems;
+      fill();
+    }
+  };
+  xhr.open("GET", "../php/pizzen.php", true);
+  xhr.send();
+}
 
 var fill = function(){
   "use strict";
@@ -42,7 +27,7 @@ var fill = function(){
     priceLabel.className = "right menuitem";
 
     nameLabel.textContent = menuitems[i].name;
-    priceLabel.textContent = "0 €";
+    priceLabel.textContent = menuitems[i].price + "€";
 
     menuitem.id=i;
     menuitem.type="button";
@@ -58,7 +43,7 @@ var fill = function(){
 
 var add = function(artNr){
   "use strict";
-  auswahl.push(menuitems[artNr]);
+  auswahl.push(menuitems[artNr].id);
   update();
 };
 
