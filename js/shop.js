@@ -103,7 +103,7 @@ var submit2 = function(){
         console.log(this.responseText);
       }
     };
-    xhr.open("POST", "../php/bestellung.php", true);
+    xhr.open("POST", "../php/shop.php", true);
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var par = {
