@@ -88,18 +88,16 @@ var submit2 = function(){
     s+=auswahl[i][0]+"\n";
   }
   s+="Ihr Preis: "+sum+" €";
-  console.log(auswahl.length);
   if(auswahl.length != 0){
     alert(s);
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200){
+        console.log(this.responseText);
+      }
+    };
+    xhr.open("POST", "../php/bestellung.php", true);
+    xhr.send({bestellung: auswahl});
   }
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-      console.log(this.responseText);
-    }
-  };
-  xhr.open("POST", "http://localhost/php/bestellung.php", true);
-  xhr.send(auswahl);
-
 };
