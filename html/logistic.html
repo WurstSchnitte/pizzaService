@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="../css/pizza.css">
+  <title>Logistik</title>
+</head>
+<body>
+  <header>
+    <h1>Pizza Auswahl</h1>
+  </header>
+    <!--In diesem Formular befindet sich der Lieferungsstand der Pizzen-->
+    <form id="lieferantUebersicht" action="http://www.fbi.h-da.de/cgi-bin/Echo.pl"  accept-charset="UTF-8" method="get">
+      <fieldset>
+        <legend>Auslieferungszustand</legend>
+        <ul>
+          <li>
+            <span>Müller,</span>
+            <span>Heidelbergerstr. 103</span>
+            <span>15,50€</span>
+          </li>
+          <li>
+            <span>Margherita, Tuna, Europa</span>
+          </li>
+          <li>
+            <span>fertig</span>
+            <span>unterwegs</span>
+            <span>ausgeliefert</span>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="lieferzustand" value="fertig" onclick="document.forms['lieferantUebersicht'].submit();"/>
+            </label>
+              <input type="radio" name="lieferzustand" value="unterwegs" onclick="document.forms['lieferantUebersicht'].submit();"/>
+              <input type="radio" name="lieferzustand"  value="ausgeliefert" onclick="document.forms['lieferantUebersicht'].submit();" checked/>
+          </li>
+        </ul>
+      </fieldset>
+    </form>
+</body>
+</html>
