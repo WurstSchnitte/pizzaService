@@ -92,3 +92,7 @@ footer {
     height: 2em;
   }
 }
+
+#bstZst {
+  max-width: 100%;
+}

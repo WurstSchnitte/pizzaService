@@ -13,38 +13,8 @@
     <form id="bestellungsUebersicht" action="KundeBestellung.html" accept-charset="UTF-8" method="get">
       <fieldset>
         <legend>Bestellungs Zustand</legend>
-        <ul>
-          <li>
-            <span>bestellt</span>
-            <span>im Ofen</span>
-            <span>fertig</span>
-            <span>unterwegs</span>
-          </li>
-          <li>
-            <label>Margherita
-              <input type="radio" name="margherita" checked/>
-            </label>
-              <input type="radio" name="margherita"/>
-              <input type="radio" name="margherita"/>
-              <input type="radio" name="margherita"/>
-          </li>
-          <li>
-            <label>Tuna
-              <input type="radio" name="tuna"/>
-            </label>
-              <input type="radio" name="tuna" checked/>
-              <input type="radio" name="tuna"/>
-              <input type="radio" name="tuna"/>
-          </li>
-          <li>
-            <label>Europa
-              <input type="radio" name="europa"/>
-            </label>
-              <input type="radio" name="europa"/>
-              <input type="radio" name="europa" checked/>
-              <input type="radio" name="europa"/>
-          </li>
-        </ul>
+        <table id="bestellZustand">
+        </table>
         <button id="btnNeueBestellung">Neue Bestellung</button>
       </fieldset>
     </form>
