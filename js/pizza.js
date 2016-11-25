@@ -85,13 +85,17 @@ var update = function(){
 var submit2 = function(){
   "use strict";
   var s="Ihre Bestellung:\n";
-  var bst = []
+  var bst = [];
+  var adr = document.getElementById("adr").value;
+
   for(var i=0; i<auswahl.length; i++){
     s+=auswahl[i].name+"\n";
     bst.push(auswahl[i].id);
   }
+
   s+="Ihr Preis: "+sum+" €";
-  if(auswahl.length != 0){
+
+  if(auswahl.length != 0 && adr != ""){
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function(){
@@ -103,9 +107,10 @@ var submit2 = function(){
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var par = {
-      "adresse": document.getElementById("adr").value,
+      "adresse": ,
       "bestellung": bst
     };
     xhr.send(JSON.stringify(par));
   }
+
 };
