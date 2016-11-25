@@ -100,6 +100,6 @@ var submit2 = function(){
     }
   };
   xhr.open("POST", "http://localhost/php/bestellung.php", true);
-  xhr.send();
+  xhr.send(auswahl);
 
 };
