@@ -1,13 +1,13 @@
 var menuitems = [
-  ['Margherita',5.99],
-  ['Tuna',7.99],
-  ['Europa', 8.99],
-  ['Salami', 8.99],
-  ['Funghi', 8.99],
-  ['Fuoco', 8.99],
-  ['Schinken', 8.99],
-  ['Diavolo', 8.99]
-];
+    {"name":'Margherita'},
+    {"name":'Tuna'},
+    {"name":'Europa'},
+    {"name":'Salami'},
+    {"name":'Funghi'},
+    {"name":'Fuoco'},
+    {"name":'Schinken'},
+    {"name":'Diavolo'}
+  ];
 
 //hallo
 
@@ -25,8 +25,8 @@ var fill = function(){
     nameLabel.className = "left menuitem";
     priceLabel.className = "right menuitem";
 
-    nameLabel.textContent = menuitems[i][0];
-    priceLabel.textContent = menuitems[i][1]+" €";
+    nameLabel.textContent = menuitems[i].name;
+    priceLabel.textContent = "0 €";
 
     menuitem.id=i;
     menuitem.type="button";
@@ -68,7 +68,7 @@ var update = function(){
 
   for(var i=0; i<auswahl.length; i++){
     var el = document.createElement("option");
-    el.textContent = auswahl[i][0];
+    el.textContent = auswahl[i].name;
     auswahlSelect.appendChild(el);
   }
 
@@ -76,7 +76,7 @@ var update = function(){
   sum = 0;
 
   for(i=0; i<auswahl.length; i++){
-    sum += auswahl[i][1];
+    sum += 0;//auswahl[i][1];
   }
   price.textContent = Math.round(sum*100)/100 + " €";
 };
@@ -88,8 +88,15 @@ var submit2 = function(){
     s+=auswahl[i][0]+"\n";
   }
   s+="Ihr Preis: "+sum+" €";
+<<<<<<< HEAD
   if(auswahl.length != 0){
     alert(s);
+=======
+
+  if(auswahl.length != 0){
+    alert(s);
+
+>>>>>>> c866525b0a704db6ee953e940d83b12917537e0c
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function(){
@@ -98,6 +105,11 @@ var submit2 = function(){
       }
     };
     xhr.open("POST", "../php/bestellung.php", true);
+<<<<<<< HEAD
     xhr.send({bestellung: auswahl});
+=======
+    xhr.send({"bestellung": auswahl});
+
+>>>>>>> c866525b0a704db6ee953e940d83b12917537e0c
   }
 };
