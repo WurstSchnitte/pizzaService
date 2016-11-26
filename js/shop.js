@@ -3,6 +3,7 @@ var menuitems = [];
 var sum = 0;
 
 var init=function(){
+  "use strict";
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
@@ -10,7 +11,7 @@ var init=function(){
       fill();
     }
   };
-  xhr.open("GET", "../php/pizzen.php", true);
+  xhr.open("GET", "../php/mysql_get_every_pizza.php", true);
   xhr.send();
 }
 
@@ -99,10 +100,11 @@ var submit2 = function(){
 
     xhr.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
+        //console.log(this.responseText);
         window.location.href = "info.html?"+this.responseText;
       }
     };
-    xhr.open("POST", "../php/order.php", true);
+    xhr.open("POST", "../php/mysql_insert_bestellung.php", true);
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var par = {
