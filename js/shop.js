@@ -6,7 +6,6 @@ var init=function(){
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
-      console.log(this.responseText);
       menuitems = JSON.parse(this.responseText).menuitems;
       fill();
     }
@@ -100,7 +99,7 @@ var submit2 = function(){
 
     xhr.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
-        console.log(this.responseText);
+        window.location.href = "info.html?"+this.responseText;
       }
     };
     xhr.open("POST", "../php/order.php", true);
