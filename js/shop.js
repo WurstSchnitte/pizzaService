@@ -74,10 +74,10 @@ var update = function(){
   }
 
   var price = document.getElementById("price");
-  sum = 0;
+  var sum = 0;
 
   for(i=0; i<auswahl.length; i++){
-    sum += auswahl[i].preis;
+    sum += Math.abs(auswahl[i].preis);
   }
   price.textContent = Math.round(sum*100)/100 + " €";
 };
@@ -92,8 +92,6 @@ var submit2 = function(){
     s+=auswahl[i].name+"\n";
     bst.push(auswahl[i].id);
   }
-
-  s+="Ihr Preis: "+sum+" €";
 
   if(auswahl.length != 0 && adr != ""){
     var xhr = new XMLHttpRequest();
