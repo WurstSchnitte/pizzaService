@@ -18,74 +18,76 @@ var fillStatus = function(list){
   var logistic = document.getElementById("logistic");
 
   for (var i = 0; bestellung.length > i; i++) {
-    var form = document.createElement("form");
-    var fieldset = document.createElement("fieldset");
-    var legend = document.createElement("legend");
-    legend.innerHTML = "ID: " + bestellung[i].id + " Adresse: " + bestellung[i].adresse;
-    fieldset.appendChild(legend);
+    if(bestellung[i].zustand != 0){
+      var form = document.createElement("form");
+      var fieldset = document.createElement("fieldset");
+      var legend = document.createElement("legend");
+      legend.innerHTML = "ID: " + bestellung[i].id + " Adresse: " + bestellung[i].adresse;
+      fieldset.appendChild(legend);
 
-    var table = document.createElement("table");
-    var tablebody = document.createElement("tbody");
-    var currentRow = document.createElement("tr");
-    //BESTELLLABEL
-    var currentCell = document.createElement("th");
-    var currentText = document.createTextNode("fertig");
-    currentCell.appendChild(currentText);
-    currentRow.appendChild(currentCell);
+      var table = document.createElement("table");
+      var tablebody = document.createElement("tbody");
+      var currentRow = document.createElement("tr");
+      //BESTELLLABEL
+      var currentCell = document.createElement("th");
+      var currentText = document.createTextNode("fertig");
+      currentCell.appendChild(currentText);
+      currentRow.appendChild(currentCell);
 
-    //BESTELLZUSTAND
-    currentCell = document.createElement("th");
-    currentText = document.createTextNode("unterwegs");
-    currentCell.appendChild(currentText);
-    currentRow.appendChild(currentCell);
+      //BESTELLZUSTAND
+      currentCell = document.createElement("th");
+      currentText = document.createTextNode("unterwegs");
+      currentCell.appendChild(currentText);
+      currentRow.appendChild(currentCell);
 
-    currentCell = document.createElement("th");
-    currentText = document.createTextNode("ausgeliefert");
-    currentCell.appendChild(currentText);
-    currentRow.appendChild(currentCell);
-    tablebody.appendChild(currentRow);
+      currentCell = document.createElement("th");
+      currentText = document.createTextNode("ausgeliefert");
+      currentCell.appendChild(currentText);
+      currentRow.appendChild(currentCell);
+      tablebody.appendChild(currentRow);
 
-    currentRow = document.createElement("tr");
-		currentCell = document.createElement("td");
-    var input = document.createElement("input");
-    input.name = bestellung[i].id;
-    input.type = "radio";
-    input.value = "fertig";
-    if(bestellung[i].zustand == 1){
-      input.checked = true;
+      currentRow = document.createElement("tr");
+  		currentCell = document.createElement("td");
+      var input = document.createElement("input");
+      input.name = bestellung[i].id;
+      input.type = "radio";
+      input.value = "fertig";
+      if(bestellung[i].zustand == 1){
+        input.checked = true;
+      }
+      input.onclick = function(){changeStatus(this.name, this.value)};
+      currentCell.appendChild(input);
+  		currentRow.appendChild(currentCell);
+
+    	currentCell = document.createElement("td");
+      input = document.createElement("input");
+      input.name = bestellung[i].id;
+      input.type = "radio";
+      input.value = "unterwegs";
+      if(bestellung[i].zustand == 2){
+        input.checked = true;
+      }
+      input.onclick = function(){changeStatus(this.name, this.value)};
+      currentCell.appendChild(input);
+  		currentRow.appendChild(currentCell);
+
+  		currentCell = document.createElement("td");
+      input = document.createElement("input");
+      input.name = bestellung[i].id;
+      input.type = "radio";
+      input.value = "ausgeliefert";
+      if(bestellung[i].zustand == 3){
+        input.checked = true;
+      }
+      input.onclick = function(){changeStatus(this.name, this.value)};
+      currentCell.appendChild(input);
+  		currentRow.appendChild(currentCell);
+  		tablebody.appendChild(currentRow);
+      table.appendChild(tablebody);
+      fieldset.appendChild(table);
+      form.appendChild(fieldset);
+      logistic.appendChild(form);
     }
-    input.onclick = function(){changeStatus(this.name, this.value)};
-    currentCell.appendChild(input);
-		currentRow.appendChild(currentCell);
-
-  	currentCell = document.createElement("td");
-    input = document.createElement("input");
-    input.name = bestellung[i].id;
-    input.type = "radio";
-    input.value = "unterwegs";
-    if(bestellung[i].zustand == 2){
-      input.checked = true;
-    }
-    input.onclick = function(){changeStatus(this.name, this.value)};
-    currentCell.appendChild(input);
-		currentRow.appendChild(currentCell);
-
-		currentCell = document.createElement("td");
-    input = document.createElement("input");
-    input.name = bestellung[i].id;
-    input.type = "radio";
-    input.value = "ausgeliefert";
-    if(bestellung[i].zustand == 3){
-      input.checked = true;
-    }
-    input.onclick = function(){changeStatus(this.name, this.value)};
-    currentCell.appendChild(input);
-		currentRow.appendChild(currentCell);
-		tablebody.appendChild(currentRow);
-    table.appendChild(tablebody);
-    fieldset.appendChild(table);
-    form.appendChild(fieldset);
-    logistic.appendChild(form);
   }
 }
 

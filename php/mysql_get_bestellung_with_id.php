@@ -10,23 +10,32 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
-$sql = "SELECT pizza.name, pizzabestellung.zustand FROM pizzabestellung, pizza
-                                                  WHERE pizzabestellung.bestellung_id = $_GET[id]
-                                                  AND pizza.id = pizzabestellung.pizza_id";
+if($_GET['id'] != "all"){
+  $sql = "SELECT * FROM bestellung WHERE bestellung.id = $_GET[id]";
+}else{
+  $sql = "SELECT * FROM bestellung";
+}
 $result = $conn->query($sql);
+$index = 0;
+$array = new \stdClass;
+while($row = $result->fetch_assoc()){
+  $array->bestellung[$index] = new \stdClass;
+  $array->bestellung[$index]->id = $row['id'];
+  $array->bestellung[$index]->zustand = $row['zustand'];
 
-if ($result->num_rows > 0) {
+  $sql = "SELECT pizza.name, pizzabestellung.zustand FROM pizzabestellung, pizza
+                                                  WHERE pizzabestellung.bestellung_id = $row[id]
+                                                  AND pizza.id = pizzabestellung.pizza_id";
+  $result2 = $conn->query($sql);
   // output data of each row
   $i = 0;
-  while($row = $result->fetch_assoc()) {
-    $array->menuitems[$i] = new \stdClass;
-    $array->menuitems[$i]->name=$row["name"];
-    $array->menuitems[$i]->zustand=$row["zustand"];
+  while($row2 = $result2->fetch_assoc()) {
+    $array->bestellung[$index]->pizzen[$i] = new \stdClass;
+    $array->bestellung[$index]->pizzen[$i]->name=$row2["name"];
+    $array->bestellung[$index]->pizzen[$i]->zustand=$row2["zustand"];
     $i++;
   }
-} else {
-  //echo "0 results";
+  $index++;
 }
 $conn->close();
 echo json_encode($array);

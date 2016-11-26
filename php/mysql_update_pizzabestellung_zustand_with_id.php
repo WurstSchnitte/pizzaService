@@ -20,8 +20,14 @@
   }
   $sql = "UPDATE pizzabestellung SET zustand = $zustand WHERE pizzabestellung.id = $_GET[id]";
   if ($conn->query($sql) === TRUE) {
-      echo "Record updated successfully";
+      //echo "Record updated successfully";
   } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+      //echo "Error: " . $sql . "<br>" . $conn->error;
   }
+
+  $sql = "SELECT pizzabestellung.bestellung_id FROM pizzabestellung WHERE pizzabestellung.id = $_GET[id]";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  $conn->close();
+  echo $row['bestellung_id'];
 ?>
