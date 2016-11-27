@@ -10,7 +10,7 @@ var init = function(){
   };
   xhr.open("GET", "../php/mysql_get_every_bestellung.php", true);
   xhr.send();
-}
+};
 
 var fillStatus = function(list){
   "use strict";
@@ -18,7 +18,7 @@ var fillStatus = function(list){
   var logistic = document.getElementById("logistic");
 
   for (var i = 0; bestellung.length > i; i++) {
-    if(bestellung[i].zustand != 0){
+    if(bestellung[i].zustand !== 0){
       var form = document.createElement("form");
       var fieldset = document.createElement("fieldset");
       var legend = document.createElement("legend");
@@ -55,7 +55,7 @@ var fillStatus = function(list){
       if(bestellung[i].zustand == 1){
         input.checked = true;
       }
-      input.onclick = function(){changeStatus(this.name, this.value)};
+      input.onclick = function(){changeStatus(this.name, this.value);};
       currentCell.appendChild(input);
   		currentRow.appendChild(currentCell);
 
@@ -67,7 +67,7 @@ var fillStatus = function(list){
       if(bestellung[i].zustand == 2){
         input.checked = true;
       }
-      input.onclick = function(){changeStatus(this.name, this.value)};
+      input.onclick = function(){changeStatus(this.name, this.value);};
       currentCell.appendChild(input);
   		currentRow.appendChild(currentCell);
 
@@ -79,7 +79,7 @@ var fillStatus = function(list){
       if(bestellung[i].zustand == 3){
         input.checked = true;
       }
-      input.onclick = function(){changeStatus(this.name, this.value)};
+      input.onclick = function(){changeStatus(this.name, this.value);};
       currentCell.appendChild(input);
   		currentRow.appendChild(currentCell);
   		tablebody.appendChild(currentRow);
@@ -89,7 +89,7 @@ var fillStatus = function(list){
       logistic.appendChild(form);
     }
   }
-}
+};
 
 var changeStatus = function(bestellung, zustand){
   "use strict";
@@ -102,4 +102,4 @@ var changeStatus = function(bestellung, zustand){
   };
   xhr.open("GET", "../php/mysql_update_bestellung_zustand_with_id.php?id="+bestellung+"&zustand="+zustand, true);
   xhr.send();
-}
+};

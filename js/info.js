@@ -12,7 +12,7 @@ var init = function(){
   };
   xhr.open("GET", "../php/mysql_get_bestellung_with_id.php?id="+id, true);
   xhr.send();
-}
+};
 
 var fillStatus = function(list){
   "use strict";
@@ -94,7 +94,7 @@ var fillStatus = function(list){
         var imofen = "O";
         fertig = "O";
 
-        if(menuitems[i].zustand == 0){
+        if(menuitems[i].zustand === 0){
           bestellt = "X";
         }else if(menuitems[i].zustand == 1){
           imofen = "X";
@@ -133,4 +133,4 @@ var fillStatus = function(list){
     }
     content.appendChild(form);
   }
-}
+};

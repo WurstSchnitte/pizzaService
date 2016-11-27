@@ -13,7 +13,7 @@ var init=function(){
   };
   xhr.open("GET", "../php/mysql_get_every_pizza.php", true);
   xhr.send();
-}
+};
 
 var fill = function(){
   "use strict";
@@ -93,7 +93,7 @@ var submit2 = function(){
     bst.push(auswahl[i].id);
   }
 
-  if(auswahl.length != 0 && adr != ""){
+  if(auswahl.length !== 0 && adr !== ""){
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function(){

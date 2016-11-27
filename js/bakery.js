@@ -10,14 +10,14 @@ var init = function(){
   };
   xhr.open("GET", "../php/mysql_get_every_pizzabestellung.php", true);
   xhr.send();
-}
+};
 
 var fillStatus = function(list){
   "use strict";
   var bestellung = JSON.parse(list).bestellung;
   var bakery = document.getElementById("bakery");
   for (var i = 0; bestellung.length > i; i++) {
-    if(bestellung[i].zustand == 0){
+    if(bestellung[i].zustand === 0){
       var form = document.createElement("form");
       var fieldset = document.createElement("fieldset");
       var legend = document.createElement("legend");
@@ -61,10 +61,10 @@ var fillStatus = function(list){
         input.name = bestellung[i].pizzen[j].id;
         input.type = "radio";
         input.value = "bestellt";
-        if(bestellung[i].pizzen[j].zustand == 0){
+        if(bestellung[i].pizzen[j].zustand === 0){
           input.checked = true;
         }
-        input.onclick = function(){changeStatus(this.name, this.value)};
+        input.onclick = function(){changeStatus(this.name, this.value);};
         currentCell.appendChild(input);
     		currentRow.appendChild(currentCell);
     		currentCell = document.createElement("td");
@@ -75,7 +75,7 @@ var fillStatus = function(list){
         if(bestellung[i].pizzen[j].zustand == 1){
           input.checked = true;
         }
-        input.onclick = function(){changeStatus(this.name, this.value)};
+        input.onclick = function(){changeStatus(this.name, this.value);};
         currentCell.appendChild(input);
     		currentRow.appendChild(currentCell);
     		currentCell = document.createElement("td");
@@ -86,7 +86,7 @@ var fillStatus = function(list){
         if(bestellung[i].pizzen[j].zustand == 2){
           input.checked = true;
         }
-        input.onclick = function(){changeStatus(this.name, this.value)};
+        input.onclick = function(){changeStatus(this.name, this.value);};
         currentCell.appendChild(input);
     		currentRow.appendChild(currentCell);
     		tablebody.appendChild(currentRow);
@@ -97,7 +97,7 @@ var fillStatus = function(list){
       bakery.appendChild(form);
     }
   }
-}
+};
 
 var changeStatus = function(bestellung, zustand){
   "use strict";
@@ -110,11 +110,11 @@ var changeStatus = function(bestellung, zustand){
         if(this.readyState == 4 && this.status == 200){
           console.log(this.responseText);
         }
-      }
+      };
       request.open("GET", "../php/mysql_check_bestellung_fertig.php?id="+this.responseText, true);
       request.send();
-    };
-  }
+    }
+  };
   xhr.open("GET", "../php/mysql_update_pizzabestellung_zustand_with_id.php?id="+bestellung+"&zustand="+zustand, true);
   xhr.send();
-}
+};
