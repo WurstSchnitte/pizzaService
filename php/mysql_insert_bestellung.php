@@ -13,7 +13,7 @@
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
-  $sql = "INSERT INTO `bestellung` (`id`, `adresse`, `preis`) VALUES (NULL, '$json->adresse', 0)";
+  $sql = "INSERT INTO `bestellung` (`id`, `adresse`, `preis`, zustand) VALUES (NULL, '$json->adresse', 0, 0)";
   if ($conn->query($sql) === TRUE) {
       //echo "New record created successfully";
   } else {
@@ -26,7 +26,7 @@
   $bestellungsid = $result->fetch_assoc();
 
   for($i = 0; $i < sizeof($bestellung); $i++){
-     $sql = "INSERT INTO `pizzabestellung` (`pizza_id`, `bestellung_id`, 'zustand') VALUES ('$bestellung[$i]', '$bestellungsid[id]', 0)";
+     $sql = "INSERT INTO pizzabestellung (pizza_id, bestellung_id, zustand) VALUES ($bestellung[$i], $bestellungsid[id], 0)";
      if ($conn->query($sql) === TRUE) {
          //echo "New record created successfully";
      } else {
