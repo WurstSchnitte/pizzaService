@@ -15,9 +15,9 @@
   }
   $sql = "INSERT INTO `bestellung` (`id`, `adresse`, `preis`) VALUES (NULL, '$json->adresse', 0)";
   if ($conn->query($sql) === TRUE) {
-      echo "New record created successfully";
+      //echo "New record created successfully";
   } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+      //echo "Error: " . $sql . "<br>" . $conn->error;
   }
 
   $sql = "SELECT id FROM bestellung WHERE bestellung.adresse = '$json->adresse'";
@@ -28,12 +28,11 @@
   for($i = 0; $i < sizeof($bestellung); $i++){
      $sql = "INSERT INTO `pizzabestellung` (`pizza_id`, `bestellung_id`, 'zustand') VALUES ('$bestellung[$i]', '$bestellungsid[id]', 0)";
      if ($conn->query($sql) === TRUE) {
-         echo "New record created successfully";
+         //echo "New record created successfully";
      } else {
-         echo "Error: " . $sql . "<br>" . $conn->error;
+         //echo "Error: " . $sql . "<br>" . $conn->error;
      }
   }
   $conn->close();
-
-header("Location: ../html/info.html");
+  echo $bestellungsid['id'];
 ?>
