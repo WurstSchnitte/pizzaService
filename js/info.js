@@ -7,7 +7,9 @@ var init = function(){
   xhr.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
       console.log(this.responseText);
-      fillStatus(this.responseText);
+      if (this.responseText != "-1") {
+          fillStatus(this.responseText);
+      }
     }
   };
   xhr.open("GET", "../php/mysql_get_bestellung_with_id.php?id="+id, true);
@@ -94,7 +96,7 @@ var fillStatus = function(list){
         var imofen = "O";
         fertig = "O";
 
-        if(menuitems[i].zustand === 0){
+        if(menuitems[i].zustand == 0){
           bestellt = "X";
         }else if(menuitems[i].zustand == 1){
           imofen = "X";

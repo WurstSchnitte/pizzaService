@@ -5,7 +5,9 @@ var init = function(){
   xhr.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
       console.log(this.responseText);
-      fillStatus(this.responseText);
+      if (this.responseText != "-1") {
+          fillStatus(this.responseText);
+      }
     }
   };
   xhr.open("GET", "../php/mysql_get_every_bestellung.php", true);
@@ -18,7 +20,7 @@ var fillStatus = function(list){
   var logistic = document.getElementById("logistic");
 
   for (var i = 0; bestellung.length > i; i++) {
-    if(bestellung[i].zustand !== 0){
+    if(bestellung[i].zustand != 0){
       var form = document.createElement("form");
       var fieldset = document.createElement("fieldset");
       var legend = document.createElement("legend");

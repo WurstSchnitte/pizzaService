@@ -38,5 +38,10 @@ while($row = $result->fetch_assoc()){
   $index++;
 }
 $conn->close();
-echo json_encode($array);
+if ($index > 0) {
+    echo json_encode($array);
+}
+else {
+  echo -1;
+}
 ?>
