@@ -1,49 +1,15 @@
 var auswahl = [];
-var menuitems = [];
 var sum = 0;
-
-var init=function(){
-  "use strict";
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-      menuitems = JSON.parse(this.responseText).menuitems;
-      fill();
-    }
-  };
-  xhr.open("GET", "../php/mysql_get_every_pizza.php", true);
-  xhr.send();
-};
-
-var fill = function(){
-  "use strict";
-  var menulist = document.getElementById("menulist");
-  for(var i=0; i<menuitems.length; i++){
-    var menuitem = document.createElement("button");
-    var nameLabel = document.createElement("span");
-    var priceLabel = document.createElement("span");
-
-    nameLabel.className = "left menuitem";
-    priceLabel.className = "right menuitem";
-
-    nameLabel.textContent = menuitems[i].name;
-    priceLabel.textContent = menuitems[i].preis + "€";
-
-    menuitem.id=i;
-    menuitem.type="button";
-    menuitem.onclick = function(){
-      add(this.id);
-    };
-    menuitem.appendChild(nameLabel);
-    menuitem.appendChild(priceLabel);
-
-    menulist.appendChild(menuitem);
-  }
-};
 
 var add = function(artNr){
   "use strict";
-  auswahl.push(menuitems[artNr]);
+    var name = document.getElementById(artNr).firstChild.textContent;
+    var preis = parseFloat(document.getElementById(artNr).childNodes[1].textContent);
+    var menuItem = new Array ();
+    menuItem['id'] = artNr;
+    menuItem['name']  = name;
+    menuItem['preis']  = preis;
+  auswahl.push(menuItem);
   update();
 };
 
@@ -99,7 +65,7 @@ var submit2 = function(){
     xhr.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
         //console.log(this.responseText);
-        window.location.href = "info.html?"+this.responseText;
+        window.location.href = "Info.php?id="+this.responseText;
       }
     };
     xhr.open("POST", "../php/mysql_insert_bestellung.php", true);
