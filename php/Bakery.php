@@ -18,6 +18,7 @@
 
 // to do: change name 'PageTemplate' throughout this file
 require_once './Page.php';
+require_once './BlockOrderBakery.php';
 
 /**
  * This is a template for top level classes, which represent 
@@ -103,7 +104,6 @@ class Bakery extends Page
      */
     protected function generateView() 
     {
-        $this->getViewData();
         $this->generatePageHeader('Bäckerei', 'bakery.js');
         // to do: call generateView() for all members
         // to do: output view of this page
@@ -115,73 +115,8 @@ class Bakery extends Page
   </header>
 EOF;
         if (!empty($this->loadedData)) {
-            echo <<< EOF
-    <!--Definition des Formulars-->
-    <fieldset id="bakery">
-      <legend>Bäcker Status</legend>
-      
-EOF;
-            foreach ($this->loadedData as $bestellung) {
-                echo <<< EOF
-      <form>
-        <fieldset>
-          <legend>
-EOF;
-                echo $bestellung['id'];
-                echo <<< EOF
-</legend>
-            <table>
-              <tr>
-                <th>Pizza</th><th>bestellt</th><th>im Ofen</th><th>fertig</th>
-              </tr>
-
-EOF;
-                $i = 0;
-                while (!empty($bestellung["$i"])) {
-                    if ($bestellung["$i"]['zustand'] == 0)
-                        echo '              <tr>' . "\n" . '                <td>' . $bestellung["$i"]['name'] . '</td>' . "\n" .
-                            '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="bestellt" onclick="changeStatus(name, value)" checked>' . "\n" .
-                            '                </td>' . "\n" . '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="im Ofen" onclick="changeStatus(name, value)">' . "\n" .
-                            '                </td>' . "\n" . '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="fertig" onclick="changeStatus(name, value)">' . "\n" .
-                            '                </td>' . "\n" .
-                            '              </tr>' . "\n";
-                    elseif ($bestellung["$i"]['zustand'] == 1)
-                        echo '              <tr>' . "\n" . '                <td>' . $bestellung["$i"]['name'] . '</td>' . "\n" .
-                            '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="bestellt" onclick="changeStatus(name, value)">' . "\n" .
-                            '                </td>' . "\n" . '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="im Ofen" onclick="changeStatus(name, value)" checked>' . "\n" .
-                            '                </td>' . "\n" . '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="fertig" onclick="changeStatus(name, value)">' . "\n" .
-                            '                </td>' . "\n" .
-                            '              </tr>' . "\n";
-                    elseif ($bestellung["$i"]['zustand'] == 2)
-                        echo '              <tr>' . "\n" . '                <td>' . $bestellung["$i"]['name'] . '</td>' . "\n" .
-                            '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="bestellt" onclick="changeStatus(name, value)">' . "\n" .
-                            '                </td>' . "\n" . '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="im Ofen" onclick="changeStatus(name, value)">' . "\n" .
-                            '                </td>' . "\n" . '                <td>' . "\n" .
-                            '                  <input type="radio" name="' . $bestellung["$i"]['id'] . '" value="fertig" onclick="changeStatus(name, value)" checked>' . "\n" .
-                            '                </td>' . "\n" .
-                            '              </tr>' . "\n";
-                    $i++;
-                }
-                echo <<< EOF
-            </table>
-        </fieldset>
-      </form>
-
-EOF;
-            }
-
-            echo <<< EOF
-    </fieldset>
-
-EOF;
+            $blockOrderBakery = new BlockOrderBakery($this->_database, $this->loadedData);
+            $blockOrderBakery->generateView('bakeryOrder');
         }
         else {
             echo "\n".'  <h2>Keine Aufträge vorhanden!</h2>'."\n";

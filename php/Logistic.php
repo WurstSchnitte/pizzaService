@@ -18,6 +18,7 @@
 
 // to do: change name 'PageTemplate' throughout this file
 require_once './Page.php';
+require_once './BlockLogistic.php';
 
 /**
  * This is a template for top level classes, which represent 
@@ -92,7 +93,6 @@ class Logistic extends Page
      */
     protected function generateView() 
     {
-        $this->getViewData();
         $this->generatePageHeader('Logistik', 'logistic.js');
         // to do: call generateView() for all members
         // to do: output view of this page
@@ -104,70 +104,8 @@ class Logistic extends Page
   </header>
 EOF;
         if (!empty($this->loadedData)) {
-            echo <<< EOF
-    <!--In diesem Formular befindet sich der Lieferungsstand der Pizzen-->
-  <fieldset id="logistic">
-    <legend>Logistik Status</legend>
-
-EOF;
-            foreach ($this->loadedData as $bestellung) {
-                echo <<< EOF
-    <form>
-      <fieldset>
-        <legend>
-EOF;
-                echo 'ID: ' . $bestellung['id'] . ' Adresse: ' . $bestellung['adresse'] . '</legend>';
-                echo <<< EOF
-            
-        <table>
-          <tr>
-            <th>fertig</th><th>unterwegs</th><th>ausgeliefert</th>
-          </tr>
-          <tr>
-
-EOF;
-                if ($bestellung['zustand'] == 1) {
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="fertig" onclick="changeStatus(name, value)" checked>' . "\n" .
-                        '          </td>' . "\n";
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="unterwegs" onclick="changeStatus(name, value)">' . "\n" .
-                        '          </td>' . "\n";
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="ausgeliefert" onclick="changeStatus(name, value)">' . "\n" .
-                        '          </td>' . "\n";
-                } elseif ($bestellung['zustand'] == 2) {
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="fertig" onclick="changeStatus(name, value)">' . "\n" .
-                        '          </td>' . "\n";
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="unterwegs" onclick="changeStatus(name, value)" checked>' . "\n" .
-                        '          </td>' . "\n";
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="ausgeliefert" onclick="changeStatus(name, value)">' . "\n" .
-                        '          </td>' . "\n";
-                } elseif ($bestellung['zustand'] == 3) {
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="fertig" onclick="changeStatus(name, value)">' . "\n" .
-                        '          </td>' . "\n";
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="unterwegs" onclick="changeStatus(name, value)">' . "\n" .
-                        '          </td>' . "\n";
-                    echo '          <td>' . "\n" .
-                        '            <input type="radio" name="' . $bestellung['id'] . '" value="ausgeliefert" onclick="changeStatus(name, value)" checked>' . "\n" .
-                        '          </td>' . "\n";
-                }
-                echo <<< EOF
-        </table>
-      </fieldset>
-    </form>
-
-EOF;
-            }
-            echo <<< EOF
-  </fieldset>
-
-EOF;
+            $blockLogistic = new BlockLogistic($this->_database, $this->loadedData);
+            $blockLogistic->generateView('deliveries');
         }
         else {
             echo "\n".'  <h2>Keine Aufträge vorhanden!</h2>'."\n";

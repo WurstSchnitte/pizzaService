@@ -18,6 +18,8 @@
 
 // to do: change name 'PageTemplate' throughout this file
 require_once './Page.php';
+require_once './BlockShoppingCart.php';
+require_once './BlockPizza.php';
 
 /**
  * This is a template for top level classes, which represent 
@@ -33,7 +35,6 @@ require_once './Page.php';
  */
 class Shop extends Page
 {
-    private $loadedData = null;
     // to do: declare reference variables for members 
     // representing substructures/blocks
     
@@ -71,15 +72,6 @@ class Shop extends Page
     protected function getViewData()
     {
         // to do: fetch data for this view from the database
-        $sql = "SELECT * FROM Pizza";
-        $result = $this->_database->query($sql);
-        $menuItems = null;
-        $i = 0;
-        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-            $menuItems[$i] = $row;
-            $i++;
-        }
-        return $menuItems;
     }
     
     /**
@@ -93,11 +85,9 @@ class Shop extends Page
      */
     protected function generateView() 
     {
-        //$this->getViewData();
         $this->generatePageHeader('Shop', 'shop.js');
         // to do: call generateView() for all members
         // to do: output view of this page
-        $loadedData = $this->getViewData();
         echo <<<EOF
     <body>
     <header>
@@ -106,42 +96,12 @@ class Shop extends Page
     <main>
       <!--Hier wird das Formular für die Bestellung der Pizzen definiert-->
       <form id="PizzaAuswahl">
-        <!--Der linke Teil für die Auswahl der Pizzen.-->
-        <fieldset class="half left">
-          <legend>Pizzen</legend>
-          <ul id="menulist">
 EOF;
-        foreach ($loadedData as $menuItem) {
-            echo "\n".'           <li><button type="button" id="'.$menuItem['id'].'" onclick="add('.$menuItem['id'].')"><span class="left">'.$menuItem['name']
-                .'</span><span class="right">'.$menuItem['preis'].'€</span></button>';
-        }
+        $blockPizza = new BlockPizza($this->_database);
+        $blockPizza->generateView('pizzaVariety');
+        $blockShoppingCart = new BlockShoppingCart($this->_database);
+        $blockShoppingCart->generateView('shoppingCart');
         echo <<< EOF
-
-        </ul>
-        </fieldset>
-        <!--Der rechte Teil, in dem sich die Ausgewählten Pizzen für die Bestellung befinden
-            Zusätzlich befinden sich Knöpfe fürs Löschen einzelner oder aller Pizzen und ein Gesamtpreis-->
-        <fieldset class="half right">
-          <legend>Auswahl</legend>
-          <select id="auswahl" multiple>
-            <!-- filledWithJs -->
-          </select>
-          <ul>
-            <li><button type="button" id="btnAuswahlLoeschen" onclick="rem(false)">Auswahl L&ouml;schen</button></li>
-            <li><button type="button" id="btnAllesLoeschen" onclick="rem(true)">Alles L&ouml;schen</button></li>
-          </ul>
-          <br/>
-          <label>Preis: <span id="price"></span></label>
-          <br/>
-          <!--Hier kann die Adresse eingegeben werden und ein Knopf fürs Abschicken der Bestellung-->
-          <fieldset class="half right">
-            <legend>Bestellen</legend>
-            <label>Adresse
-              <input type="text" id="adr" size="70" maxlength="40" placeholder="Ihre Adresse" required/>
-            </label>
-            <button type="button" onclick="submit2()" id="btnBestellen">Bestellen</button>
-          </fieldset>
-        </fieldset>
       </form>
     </main>
 

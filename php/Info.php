@@ -18,6 +18,7 @@
 
 // to do: change name 'PageTemplate' throughout this file
 require_once './Page.php';
+require_once './BlockOrderInfo.php';
 
 /**
  * This is a template for top level classes, which represent 
@@ -69,10 +70,6 @@ class Info extends Page
      */
     protected function getViewData()
     {
-        if (!isset($_GET['id'])) {
-            echo "\n".'  <h2>Ups da ist was schief gelaufen!</h2>'."\n";
-            die();
-        }
         $getInput = mysqli_real_escape_string($this->_database, $_GET['id']);
         // to do: fetch data for this view from the database
         if($getInput != "all"){
@@ -112,11 +109,11 @@ class Info extends Page
      */
     protected function generateView() 
     {
-        $this->getViewData();
         $this->generatePageHeader('Info', 'info.js');
         // to do: call generateView() for all members
         // to do: output view of this page
         $this->loadedData = $this->getViewData();
+        $blockOrder = new BlockOrderInfo($this->_database, $this->loadedData);
         echo <<< EOF
 <body>
   <header>
@@ -128,57 +125,10 @@ EOF;
     <!--Hier befindet sich das Formular über den Bestellungszustand der Pizzen-->
   <fieldset id="info">
      <legend>Status</legend>
-EOF;
-            foreach ($this->loadedData as $bestellung) {
-                echo <<< EOF
-            
-     <form>
-       <fieldset>
-         <legend>
-EOF;
-                echo $bestellung['id'];
-                echo <<< EOF
-</legend>
-         <table>
-           <tr>
-             <th>fertig</th><th>unterwegs</th><th>ausgeliefert</th>
-           </tr>
-           <tr>
 
 EOF;
-                if ($bestellung['zustand'] == 0)
-                    echo '             <td>O</td><td>O</td><td>O</td>' . "\n" . '           </tr>' . "\n";
-                elseif ($bestellung['zustand'] == 1)
-                    echo '             <td>X</td><td>O</td><td>O</td>' . "\n" . '           </tr>' . "\n";
-                elseif ($bestellung['zustand'] == 2)
-                    echo '             <td>O</td><td>X</td><td>O</td>' . "\n" . '           </tr>' . "\n";
-                elseif ($bestellung['zustand'] == 3)
-                    echo '             <td>O</td><td>O</td><td>X</td>' . "\n" . '           </tr>' . "\n";
-                echo <<< EOF
-         </table>
-         <table>
-           <tr>
-             <th>Pizza</th><th>bestellt</th><th>im Ofen</th><th>fertig</th>
-           </tr>
-
-EOF;
-                $i = 0;
-                while (!empty($bestellung["$i"])) {
-                    $pizzaZustand = $bestellung["$i"]["zustand"];
-                    if ($pizzaZustand == 0)
-                        echo '           <tr>' . "\n" . '             <td>' . $bestellung["$i"]['name'] . '</td><td>X</td><td>O</td><td>O</td>' .
-                            "\n" . '           </tr>' . "\n";
-                    elseif ($pizzaZustand == 1)
-                        echo '           <tr>' . "\n" . '             <td>' . $bestellung["$i"]['name'] . '</td><td>O</td><td>X</td><td>O</td>' .
-                            "\n" . '           </tr>' . "\n";
-                    elseif ($pizzaZustand == 2)
-                        echo '           <tr>' . "\n" . '             <td>' . $bestellung["$i"]['name'] . '</td><td>O</td><td>O</td><td>X</td>' .
-                            "\n" . '           </tr>' . "\n";
-                    $i++;
-                }
-                echo '         </table>' . "\n" . '       </fieldset>' . "\n" . '     </form>';
-                $i++;
-            }echo <<< EOF
+            $blockOrder->generateView('orderInfo');
+            echo <<< EOF
         
   </fieldset>
 EOF;
@@ -212,6 +162,14 @@ EOF;
     {
         parent::processReceivedData();
         // to do: call processReceivedData() for all members
+
+        if (!isset($_GET['id']) || $_GET['id'] == "") {
+            $this->generatePageHeader('Info');
+            echo '<body>'."\n";
+            echo '  <h2>Ups da ist was schief gelaufen!</h2>'."\n";
+            $this->generatePageFooter();
+            die();
+        }
     }
 
     /**

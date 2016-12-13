@@ -26,8 +26,8 @@
  * @author   Bernhard Kreling, <b.kreling@fbi.h-da.de> 
  * @author   Ralf Hahn, <ralf.hahn@h-da.de> 
 */
- 
-class BlockTemplate        // to do: change name of class
+
+class BlockOrderInfo        // to do: change name of class
 {
     // --- ATTRIBUTES ---
 
@@ -36,7 +36,7 @@ class BlockTemplate        // to do: change name of class
      * accessed by all operations of the class.
      */
     protected $_database = null;
-    
+    private $loadedData;
     // to do: declare reference variables for members 
     // representing substructures/blocks
     
@@ -50,9 +50,10 @@ class BlockTemplate        // to do: change name of class
      *
      * @return none
      */
-    public function __construct($database) 
+    public function __construct($database, $ViewDataResult)
     {
         $this->_database = $database;
+        $this->loadedData = $ViewDataResult;
         // to do: instantiate members representing substructures/blocks
     }
 
@@ -64,7 +65,7 @@ class BlockTemplate        // to do: change name of class
      */
     protected function getViewData()
     {
-        // to do: fetch data for this view from the database
+
     }
     
     /**
@@ -78,13 +79,62 @@ class BlockTemplate        // to do: change name of class
      */
     public function generateView($id = "") 
     {
-        $this->getViewData();
         if ($id) {
             $id = "id=\"$id\"";
         }
-        echo "<div $id>\n";
+        echo "     <div $id>\n";
         // to do: call generateView() for all members
-        echo "</div>\n";
+        foreach ($this->loadedData as $bestellung) {
+            echo <<< EOF
+       <form>
+         <fieldset>
+           <legend>
+EOF;
+            echo $bestellung['id'];
+            echo <<< EOF
+  </legend>
+           <table>
+             <tr>
+               <th>fertig</th><th>unterwegs</th><th>ausgeliefert</th>
+             </tr>
+             <tr>
+
+EOF;
+            if ($bestellung['zustand'] == 0)
+                echo '               <td>O</td><td>O</td><td>O</td>' . "\n" . '             </tr>' . "\n";
+            elseif ($bestellung['zustand'] == 1)
+                echo '               <td>X</td><td>O</td><td>O</td>' . "\n" . '             </tr>' . "\n";
+            elseif ($bestellung['zustand'] == 2)
+                echo '               <td>O</td><td>X</td><td>O</td>' . "\n" . '             </tr>' . "\n";
+            elseif ($bestellung['zustand'] == 3)
+                echo '               <td>O</td><td>O</td><td>X</td>' . "\n" . '             </tr>' . "\n";
+            echo <<< EOF
+           </table>
+           <table>
+             <tr>
+               <th>Pizza</th><th>bestellt</th><th>im Ofen</th><th>fertig</th>
+             </tr>
+
+EOF;
+            $i = 0;
+            while (!empty($bestellung["$i"])) {
+                $pizzaZustand = $bestellung["$i"]["zustand"];
+                if ($pizzaZustand == 0)
+                    echo '             <tr>' . "\n" . '               <td>' . $bestellung["$i"]['name'] . '</td><td>X</td><td>O</td><td>O</td>' .
+                        "\n" . '             </tr>' . "\n";
+                elseif ($pizzaZustand == 1)
+                    echo '             <tr>' . "\n" . '               <td>' . $bestellung["$i"]['name'] . '</td><td>O</td><td>X</td><td>O</td>' .
+                        "\n" . '           </tr>' . "\n";
+                elseif ($pizzaZustand == 2)
+                    echo '             <tr>' . "\n" . '               <td>' . $bestellung["$i"]['name'] . '</td><td>O</td><td>O</td><td>X</td>' .
+                        "\n" . '             </tr>' . "\n";
+                $i++;
+            }
+            echo '           </table>' . "\n" . '         </fieldset>' . "\n" . '       </form>'."\n";
+            $i++;
+        }
+
+        echo '     </div>';
     }
     
     /**
