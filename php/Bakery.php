@@ -177,14 +177,15 @@ EOF;
 
 EOF;
             }
+
+            echo <<< EOF
+    </fieldset>
+
+EOF;
         }
         else {
             echo "\n".'  <h2>Keine Aufträge vorhanden!</h2>'."\n";
         }
-        echo <<< EOF
-    </fieldset>
-
-EOF;
 
         $this->generatePageFooter();
     }

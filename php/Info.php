@@ -155,6 +155,8 @@ EOF;
                 elseif ($bestellung['zustand'] == 3)
                     echo '             <td>O</td><td>O</td><td>X</td>' . "\n" . '           </tr>' . "\n";
                 echo <<< EOF
+         </table>
+         <table>
            <tr>
              <th>Pizza</th><th>bestellt</th><th>im Ofen</th><th>fertig</th>
            </tr>
@@ -176,14 +178,16 @@ EOF;
                 }
                 echo '         </table>' . "\n" . '       </fieldset>' . "\n" . '     </form>';
                 $i++;
-            }
+            }echo <<< EOF
+        
+  </fieldset>
+EOF;
         }
         else {
             echo "\n".'  <h2>Keine Lieferung vorhanden!</h2>'."\n";
         }
         echo <<< EOF
         
-  </fieldset>
   <form action="Shop.php">
     <fieldset>
       <button type="submit">Zum Shop</button>
