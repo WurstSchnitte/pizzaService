@@ -1,3 +1,69 @@
+.nav {
+  text-align: center;
+}
+
+.nav-list {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-block;
+  border: 1px solid black;
+  box-shadow: 3px 3px 14px grey;
+}
+
+.nav-item a {
+  text-decoration: none;
+  display:block;
+  width: 10em;
+  padding:15px 20px;
+  color: white;
+  background: #34495E;
+}
+
+.nav-item a:hover {
+  background: #2C3E50;
+}
+
+h1 {
+  text-align: center;
+}
+
+@media screen and (max-width:57em) and (orientation:landscape) {
+  .nav-item {
+    margin-bottom: 1em;
+  }
+
+  .nav-item a {
+    font-size: 3.5em;
+    height: 1em;
+    line-height: 1em;
+  }
+
+  header h1 {
+    font-size: 4em;
+  }
+}
+
+@media screen and (orientation:portrait) {
+  .nav-item {
+    margin-bottom: 3em;
+  }
+
+  .nav-item a {
+    font-size: 4em;
+    height: 2em;
+    line-height: 2em;
+  }
+
+  header h1 {
+    font-size: 6em;
+  }
+}
+
 section form fieldset {
   width: 60%;
   margin: 0;
