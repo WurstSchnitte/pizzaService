@@ -13,14 +13,16 @@
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
-  $sql = "INSERT INTO `bestellung` (`id`, `adresse`, `preis`, zustand) VALUES (NULL, '$json->adresse', 0, 0)";
+
+  session_start();
+  $sql = "INSERT INTO `bestellung` (`id`, `adresse`, `preis`, zustand, userSession) VALUES (NULL, '$json->adresse', 0, 0, '".session_id()."')";
   if ($conn->query($sql) === TRUE) {
       //echo "New record created successfully";
   } else {
       //echo "Error: " . $sql . "<br>" . $conn->error;
   }
 
-  $sql = "SELECT id FROM bestellung WHERE bestellung.adresse = '$json->adresse'";
+  $sql = "SELECT id FROM bestellung WHERE bestellung.adresse = '$json->adresse' ORDER BY zeit DESC";
   $result = $conn->query($sql);
 
   $bestellungsid = $result->fetch_assoc();
@@ -34,5 +36,5 @@
      }
   }
   $conn->close();
-  echo $bestellungsid['id'];
-?>
+  $_SESSION['ID'] = $bestellungsid['id'];
+  $_SESSION['LAST_ACTIVITY'] = time();

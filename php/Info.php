@@ -70,13 +70,12 @@ class Info extends Page
      */
     protected function getViewData()
     {
-        $getInput = mysqli_real_escape_string($this->_database, $_GET['id']);
-        // to do: fetch data for this view from the database
-        if($getInput != "all"){
-            $sql = "SELECT * FROM bestellung WHERE bestellung.id = $getInput";
-        }else{
-            $sql = "SELECT * FROM bestellung";
+        //$getInput = mysqli_real_escape_string($this->_database, $_GET['id']);
+        if (!isset($_SESSION)) {
+            session_start();
         }
+        // to do: fetch data for this view from the database
+        $sql = "SELECT * FROM bestellung WHERE userSession = '".session_id()."'";
         $result = $this->_database->query($sql);
         $index = 0;
         $array = null;
@@ -163,10 +162,19 @@ EOF;
         parent::processReceivedData();
         // to do: call processReceivedData() for all members
 
-        if (!isset($_GET['id']) || $_GET['id'] == "") {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 3600)) {
+            session_unset();
+            session_destroy();
+        }
+
+        if (!isset($_SESSION['ID'])) {
             $this->generatePageHeader('Info');
             echo '<body>'."\n";
-            echo '  <h2>Ups da ist was schief gelaufen!</h2>'."\n";
+            echo '  <h2>Sie haben noch nichts bestellt!</h2>'."\n";
             $this->generatePageFooter();
             die();
         }
